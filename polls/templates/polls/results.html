@@ -1,9 +1,26 @@
-<h1>{{ question.question_text }}</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
+
+<section class="container has-text-centered ">
+        <h1 class="title  has-text-white is-1 my-4">Polls App</h1>
+    </section>
+
+
+    <section id="qstn">
+            <div class="container has-background-light has-text-black p-3">
+                    <h1 class="is-size-3 has-text-centered">Result</h1> <br/>
+                
+                    <h1 class="is-size-4 ">{{ question.question_text }}</h1> <br/>
 
 <ul>
 {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
 {% endfor %}
-</ul>
+</ul><br/>
 
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+                   
+            </div>
+        </section>

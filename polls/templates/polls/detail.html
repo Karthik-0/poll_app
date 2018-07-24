@@ -1,12 +1,30 @@
-<h1>{{ question.question_text }}</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+{% load static %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
+<section class="container has-text-centered ">
+    <h1 class="title  has-text-white is-1 my-4">Polls App</h1>
+</section>
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
+
+
+
+<section id="qstn">
+    <div class="container has-background-light has-text-black p-3">
+            <h1 class="is-size-4">{{ question.question_text }}</h1> <br/>
+            <div class="notification is-info  {% if error_message %} show  {% endif %}">
+                    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                  </div>
+        <form action="{% url 'polls:vote' question.id %}" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+            {% endfor %}
+            <br/>
+            <input type="submit" class="button is-medium is-link" value="Vote" />
+            </form>
+           
+    </div>
+</section>
+
